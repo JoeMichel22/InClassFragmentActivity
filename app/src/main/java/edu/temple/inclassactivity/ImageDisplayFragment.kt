@@ -17,16 +17,17 @@ const val IMAGES_KEY = "imageList"
 class ImageDisplayFragment : Fragment() {
 
     private lateinit var images: IntArray
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // If we have arguments
-        arguments?.let { it ->
-            // If we find the specific argument
-            it.getIntArray(IMAGES_KEY)?.let {
-                images = it
+
+        if(::images.isInitialized)
+            // If we have arguments
+            arguments?.let { it ->
+                // If we find the specific argument
+                it.getIntArray(IMAGES_KEY)?.let {
+                    images = it
+                }
             }
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,6 +46,15 @@ class ImageDisplayFragment : Fragment() {
         }
     }
 
+    fun setImages(_images: IntArray){
+        images= _images
+
+        with(view as RecyclerView){
+            adapter= CustomRecyclerAdapter(images)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+    }
+
     companion object {
         fun newInstance(images: IntArray) =
             ImageDisplayFragment().apply {
@@ -52,5 +62,7 @@ class ImageDisplayFragment : Fragment() {
                     putIntArray(IMAGES_KEY, images)
                 }
             }
+
     }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentContainerView
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,9 +18,10 @@ class MainActivity : AppCompatActivity() {
         // Attach an instance of ImageDisplayFragment using factory method
         val imageFrag= ImageDisplayFragment.newInstance(imageArray)
 
-        val transaction= supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragmentContainer, imageFrag)
-        transaction.commit()
-
+//        if(supportFragmentManager.findFragmentById(R.id.fragmentContainer) !is ImageDisplayFragment)
+//            val transaction= supportFragmentManager.beginTransaction()
+//            transaction.add(R.id.fragmentContainer, imageFrag)
+//            transaction.commit()
     }
+
 }
