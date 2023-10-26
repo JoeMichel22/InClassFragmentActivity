@@ -2,7 +2,7 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentContainerView
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,10 +18,16 @@ class MainActivity : AppCompatActivity() {
         // Attach an instance of ImageDisplayFragment using factory method
         val imageFrag= ImageDisplayFragment.newInstance(imageArray)
 
-//        if(supportFragmentManager.findFragmentById(R.id.fragmentContainer) !is ImageDisplayFragment)
-//            val transaction= supportFragmentManager.beginTransaction()
-//            transaction.add(R.id.fragmentContainer, imageFrag)
-//            transaction.commit()
+        if(supportFragmentManager.findFragmentById(R.id.fragmentContainer) !is ImageDisplayFragment){
+            val transaction= supportFragmentManager.beginTransaction()
+            transaction.add(R.id.fragmentContainer, imageFrag)
+            transaction.commit()
+        }
+
+
+        findViewById<Button>(R.id.btnDisplay).setOnClickListener{
+            imageFrag.setImages(imageArray)
+        }
     }
 
 }
